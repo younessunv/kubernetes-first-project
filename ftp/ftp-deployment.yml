@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ftp
+  template:
+    metadata:
+      labels:
+        app: ftp
+    spec:
+      containers:
+      - name: ftp
+        image: delfer/alpine-ftp-server
+        ports:
+        - containerPort: 21
+        - containerPort: 30000
+        - containerPort: 30009
+        env:
+        - name: USERS
+          value: "ftpuser|ftppass"
+        - name: PASV_MIN_PORT
+          value: "30000"
+        - name: PASV_MAX_PORT
+          value: "30009"
+        - name: PASV_ADDRESS
+          value: "0.0.0.0"
+        volumeMounts:
+        - mountPath: /home/ftpuser
+          name: ftp-volume
+      volumes:
+      - name: ftp-volume
+        hostPath:
+          path: /mnt/data/ftp

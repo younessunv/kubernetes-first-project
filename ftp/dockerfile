@@ -1,0 +1,12 @@
+# Use the FTP server image
+FROM delfer/alpine-ftp-server
+
+# Configure user and passive mode
+ENV USERS ftpuser|ftppass
+ENV PASV_MIN_PORT 30000
+ENV PASV_MAX_PORT 30009
+ENV PASV_ADDRESS 0.0.0.0
+
+# Create a directory for FTP data
+RUN mkdir -p /home/ftpuser
+VOLUME /home/ftpuser
