@@ -1,5 +1,5 @@
 <?php
-$host = 'db';
+$host = 'mysql';
 $user = 'testuser';
 $password = 'testpass';
 $database = 'testdb';
@@ -48,7 +48,6 @@ try {
     die("Connection failed: " . $e->getMessage());
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>

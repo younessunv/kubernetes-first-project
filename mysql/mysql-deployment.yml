@@ -13,23 +13,23 @@ spec:
         app: mysql
     spec:
       containers:
-      - name: mysql
-        image: mysql:8.0
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: "rootpass"
-        - name: MYSQL_DATABASE
-          value: "testdb"
-        - name: MYSQL_USER
-          value: "testuser"
-        - name: MYSQL_PASSWORD
-          value: "testpass"
-        ports:
-        - containerPort: 3306
-        volumeMounts:
-        - mountPath: /docker-entrypoint-initdb.d
-          name: mysql-init
+        - name: mysql
+          image: mysql:5.7
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: MYSQL_DATABASE
+              value: testdb
+            - name: MYSQL_USER
+              value: testuser
+            - name: MYSQL_PASSWORD
+              value: testpass
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-init
+              mountPath: /docker-entrypoint-initdb.d
       volumes:
-      - name: mysql-init
-        hostPath:
-          path: /mnt/data/ftp
+        - name: mysql-init
+          hostPath:
+            path: /mnt/data/mysql  # You must move init.sql to this directory

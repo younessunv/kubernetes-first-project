@@ -13,14 +13,8 @@ spec:
         app: web
     spec:
       containers:
-      - name: web
-        image: php:8.2-apache
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - mountPath: /var/www/html
-          name: web-volume
-      volumes:
-      - name: web-volume
-        hostPath:
-          path: /mnt/data/web
+        - name: web
+          image: my-php-web
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
